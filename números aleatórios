@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
+
+int comparador(const void * a, const void * b) {
+    return (*(int*)a - *(int*)b);
+}
+
+bool repeticao(int num, int array[], int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        if (array[i] == num) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int main() {
+    int numero_final[6];
+    int i = 0;
+
+    srand(time(NULL));
+
+    while (i < 6) {
+        int num_aleatorio = rand() % 100; 
+        if (!repeticao(num_aleatorio, numero_final, i)) {
+            numero_final[i] = num_aleatorio;
+            i++;
+        } 
+    }
+
+    qsort(numero_final, 6, sizeof(int), comparador);
+
+    printf("\nLista de números: \n");
+    for (i = 0; i < 6; i++) {
+        printf("%d ", numero_final[i]);
+    }
+    return 0;
+}
